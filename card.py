@@ -1,15 +1,10 @@
 # Aqui é onde será a classe de carta
 
 colorsCards = ["yellow", "red", "blue", "green"]
-# Aqui são as cartas comuns
-#key
-#number
-#color
-#value 1
 
-# voltar
-
-#key
-#number
-#color
-#value 2
+class Card:
+    def __init__(self, key, number, color, value):
+        self.key=key
+        self.number=number
+        self.color=color
+        self.value=value
