@@ -1,4 +1,3 @@
-import card
 import random
 
 def buildDeck():
@@ -23,8 +22,6 @@ def buildDeck():
         
     #retorna baralho randomizado
     return random.sample(deck, 107)
-# Instancia a função
-unoDeck = buildDeck()
 
 """
 Essa função distribui as cartas
@@ -36,3 +33,7 @@ def drawCards(numCards):
     for x in range(numCards):
         cardsDrawn.append(unoDeck.pop(0))
     return cardsDrawn
+
+
+# Instancia a função
+unoDeck = buildDeck()
