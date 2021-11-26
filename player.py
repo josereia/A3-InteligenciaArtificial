@@ -4,9 +4,12 @@ class Player:
         self.name = name
         self.cards = cards
 
+    def play(self):
+        print(" O " + str(self.name) + "vai realizar a próxima jogada ")
+
     # fisher method
     def toFish(self):
-        return "O " + str(self.name) + "vai pescar"
+        print(" O " + str(self.name) + "vai pescar ")
 
     def showHand(self):
         print("-----------------------------")
@@ -14,5 +17,6 @@ class Player:
         print("-----------------------------")
         print("Your hand:")
         for card in self.cards:
-            print(card)
+            print( str(card.value) + "-" + str(card.color))
         print("-----------------------------")
+    
