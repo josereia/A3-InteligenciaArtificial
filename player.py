@@ -6,7 +6,7 @@ class Player:
 
     # fisher method
     def toFish(self):
-        return "O jogador vai pescar"
+        return "O " + str(self.name) + "vai pescar"
 
     def showHand(self):
         print("-----------------------------")

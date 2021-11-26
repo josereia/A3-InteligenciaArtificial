@@ -1,4 +1,5 @@
 import random
+import card
 
 def buildDeck():
     deck = []
@@ -6,14 +7,13 @@ def buildDeck():
     values = [0,1,2,3,4,5,6,7,8,9, "Reverse", "+2", "Skip"]
     wilds = ["Wild", "+4"]
 
-    #Percorre a lista de colols
-    for color in colors: 
-        # Dentro de cada cor, obtem um valor da lista de values
-        for value in values:
+    for color in colors: #Percorre a lista de colols
+        
+        for value in values: # Dentro de cada cor, obtem um valor da lista de values
             cardValue = "{} {}".format(color, value)
             deck.append(cardValue)
-            # Adiciana mais uma carta de cada cor, difere de zero
-            if value !=0: 
+            
+            if value !=0: # Adiciana mais uma carta de cada cor, difere de zero
                 deck.append(cardValue)
     # Adiciona as cartas especiais    
     for i in range(4):
@@ -34,6 +34,6 @@ def drawCards(numCards):
         cardsDrawn.append(unoDeck.pop(0))
     return cardsDrawn
 
-
 # Instancia a função
 unoDeck = buildDeck()
+print(unoDeck)
