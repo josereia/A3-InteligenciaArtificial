@@ -19,12 +19,11 @@ def buildDeck():
             
     # Adiciona as cartas especiais    
     for i in range(4):
-        deck.append( card.Card("",wilds[0]) )
-        deck.append( card.Card("",wilds[1]) )
+        deck.append( card.Card("wild",wilds[0]) )
+        deck.append( card.Card("wild",wilds[1]) )
         
     #retorna baralho randomizado
-    #return random.sample(deck, 107)
-    return deck
+    return random.sample(deck, 107)
 """
 Essa função distribui as cartas
 remove a carta do bolo de cartas
