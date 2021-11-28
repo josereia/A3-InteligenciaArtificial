@@ -1,5 +1,6 @@
 from card import Card
 import discard
+import playerTurn
 
 discards = discard.discards
 class Player:
@@ -46,11 +47,23 @@ class Player:
             if (self.cards[value].color == discards[-1].color):
                 print("É da mesma cor")
                 discards.append(self.cards.pop(value))
+                playerTurn.playerTurn = 1
             elif (self.cards[value].color == discards[-1].color):
                 print("É do mesmo valor")
                 discards.append(self.cards.pop(value))
+                playerTurn.playerTurn = 1
             else:
                 print(" ----> Ops, essa carta não pode ser jogada")
+        elif (self.cards[value].weight == 2):
+            print("Carta de valor 2")
+        elif (self.cards[value].weight == 3):
+            print("Carta de valor 3")
+        elif (self.cards[value].weight == 4):
+            print("Carta de valor 4")
+        elif (self.cards[value].weight == 5):
+            print("Carta de valor 5")
+        elif (self.cards[value].weight == 6):
+            print("Carta de valor 6")
         else:
             print("----->   Carta de tipos diferentes")
 

@@ -1,0 +1,1 @@
+playerTurn = 0 #turno

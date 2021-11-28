@@ -3,11 +3,12 @@ import player
 import deck
 import discard
 import playing
+import playerTurn
 
 cleanerterminal = 'cls'
 os.system(cleanerterminal)
 
-playerTurn = 0 #turno
+
 playDirection = 1 #
 
 
@@ -22,7 +23,7 @@ while (playing.playing == True):
     
     
     #Vez do jogador zero
-    if (playerTurn == 0):
+    if (playerTurn.playerTurn == 0):
         
         # Ordena as cartas do jogador
         def get_key_weight(v):
@@ -49,7 +50,7 @@ while (playing.playing == True):
             print("------------ FIM DO JOGO -----------------")
             break
 
-    elif (playerTurn == 1):
+    elif (playerTurn.playerTurn == 1):
         
         print("* Quantidade de cartas já discartadas : " + str(len(discard.discards)) + " *" + "\n" + "-----------------------------" + "\n" )
         lista = []
@@ -64,7 +65,7 @@ while (playing.playing == True):
         players[1].showHand()
         selectedValue = input("Digite aqui: ")
         players[1].discardCard(int(selectedValue))
-        playerTurn = 0
+        playerTurn.playerTurn = 0
         
 
  #Pega a ultima carta do discards
