@@ -24,6 +24,7 @@ def buildDeck():
         
     #retorna baralho randomizado
     return random.sample(deck, 107)
+    #return deck
 """
 Essa função distribui as cartas
 remove a carta do bolo de cartas

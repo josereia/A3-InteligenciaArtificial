@@ -19,24 +19,43 @@ class Player:
     def returnLastCardOnDiscards(self): #return the last card on discard
         global discards
         return discards[-1]
-
+        
     def play(self): #Esse métoto é onde a IA irá jogar
         global discards
-        lastCardOnDiscarted = self.returnLastCardOnDiscards()
+        lastCardOnDiscarted = self.returnLastCardOnDiscards() #Chama a carta que está por cima do discards
         contador = 0
         list = []
-        for card in self.cards:
-            if (card.color == lastCardOnDiscarted.color):
-                print("É igual")
-            else:
-                print("Não é igual")
-            contador += 1
-        
-        
+
+        if ( len(self.cards) == 0  ): #Verifica se o Player tem cartas ainda
+            print("Acabou as cartas")
+        else:
+            print("Ainda há cartas")
+            """
+            for card in self.cards:
+                if (card.color == lastCardOnDiscarted.color):
+                    print("É igual")
+                else:
+                    print("Não é igual")
+                contador += 1
+            """
+
     def discardCard(self, value):
         global discards
-        print("Voce discartou a carta de valor " + str(self.cards[value].color) + "-" +  str(self.cards[value].color))
-        discards.append(self.cards.pop(value))
+        
+        if (self.cards[value].weight == discards[-1].weight):
+            if (self.cards[value].color == discards[-1].color):
+                print("É da mesma cor")
+                discards.append(self.cards.pop(value))
+            elif (self.cards[value].color == discards[-1].color):
+                print("É do mesmo valor")
+                discards.append(self.cards.pop(value))
+            else:
+                print(" ----> Ops, essa carta não pode ser jogada")
+        else:
+            print("----->   Carta de tipos diferentes")
+
+        print("Voce discartou a carta de valor: " + str(self.cards[value].color) + "-" +  str(self.cards[value].value))
+        
 
     # fisher method
     def toFish(self):
@@ -52,4 +71,3 @@ class Player:
             print( "[" + str(contador) + "] " +str(card.value) + "-" + str(card.color))
             contador += 1
         print("-----------------------------")
-    
