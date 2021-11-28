@@ -1,11 +1,13 @@
+from card import Card
 import discard
 
 discards = discard.discards
 class Player:
     # constructor
-    def __init__(self, name, cards):
+    def __init__(self, name, cards, IA):
         self.name = name
         self.cards = cards
+        self.IA = IA
 
     def get_cards(self):
         return self.cards
@@ -22,49 +24,32 @@ class Player:
         global discards
         lastCardOnDiscarted = self.returnLastCardOnDiscards()
         contador = 0
+        list = []
         for card in self.cards:
-            print(str(card.value) + "-" + str(card.color) + " peso: " + str(card.weight))
-            #verifica se cartas do jogador tem o mesmo peso da ultima carta de descartados
-            if (card.weight <= 4):
-
-                if (card.color == lastCardOnDiscarted.color):
-                    print("  --> É da mesma cor! " + str(card.color) + "-" + str(card.value))
-                    #print(str(self.cards[contador].color) )
-                    discards.append(self.cards.pop(contador))
-                    print(" O " + str(self.name) + " Jogou uma carta ")
-                    break
-                
-                elif (card.value == lastCardOnDiscarted.value):
-                    print("  --> As cartas são do mesmo valor")
-                    discards.append(self.cards.pop(contador))
-                    print(" O " + str(self.name) + " Jogou uma carta ")
-                    break
-                    
-            elif (card.weight == 5):
-                print(" O " + str(self.name) + " mudou de cor ")
-                discards.append(self.cards.pop(contador))
-            
-            elif (card.weight == 6):
-                print(" O " + str(self.name) + " jogou um +4")
-                discards.append(self.cards.pop(contador))
-                
+            if (card.color == lastCardOnDiscarted.color):
+                print("É igual")
+            else:
+                print("Não é igual")
             contador += 1
-
-            
         
         
-    
+    def discardCard(self, value):
+        global discards
+        print("Voce discartou a carta de valor " + str(self.cards[value].color) + "-" +  str(self.cards[value].color))
+        discards.append(self.cards.pop(value))
 
     # fisher method
     def toFish(self):
         print(" O " + str(self.name) + "vai pescar ")
 
     def showHand(self):
+        contador = 0
         print("-----------------------------")
-        print("Player {}".format(self.name))
+        print("Digite o valor referente a à carta que deseja selecionar: ")
         print("-----------------------------")
         print("Your hand:")
         for card in self.cards:
-            print( str(card.value) + "-" + str(card.color))
+            print( "[" + str(contador) + "] " +str(card.value) + "-" + str(card.color))
+            contador += 1
         print("-----------------------------")
     

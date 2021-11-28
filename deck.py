@@ -37,10 +37,10 @@ def drawCards(numCards):
 
 def showDeck(): # Mostra todas as cartas do baralho
     list = []
-    for x in range(0,len(deck)):
-        apelidoCarta = deck[x].color + "-" + str(deck[x].value)
+    for x in range(0,len(unoDeck)):
+        apelidoCarta = unoDeck[x].color + "-" + str(unoDeck[x].value)
         list.append(apelidoCarta)
-    return list
+    print(list)
 
 # Instancia a função
 unoDeck = buildDeck()
