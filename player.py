@@ -4,21 +4,29 @@ class Player:
         self.name = name
         self.cards = cards
 
+    def getName(self):
+        return self.name
+
+    def getCards(self):
+        return self.cards
+
+    def discard(self, cardChosen):
+        card = self.cards[cardChosen-1]
+        print("Você jogou: {}-{}".format(card.getValue(), card.getColor()))
+        print("-------------------------")
+        return self.cards.pop(cardChosen-1)
+
+    def toFish(self, cards):
+        self.cards.extend(cards)
+
     def showHand(self):
-        print("-----------------------------")
-        print("{}'s hand:".format(self.name))
-        print("-----------------------------")
+        #print("-------------------------------------------------------")
+        print("Digite o valor referente a carta que deseja selecionar.")
+        print("-------------------------------------------------------")
 
         i = 1
         for card in self.cards:
             card.showCard(i)
             i += 1
 
-        print("-----------------------------")
-
-    # fisher method
-    def toFish(self):
-        return "O " + str(self.name) + "vai pescar"
-
-    def canPlay(self):
-        return
+        print("-------------------------------------------------------")

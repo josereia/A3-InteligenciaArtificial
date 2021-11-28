@@ -1,74 +1,123 @@
-import deck
+import collections
+
+from player import Player
 
 
 class Game:
-    def __init__(self, playerss):
-        self.players = playerss
-        self.numPlayers = len(playerss)
-        self.playerTurn = 0  # turno
-        self.playDirection = 1
+    def __init__(self, deck, players):
+        self.deck = deck
+        self.players = players
+        self.playerTurn = 0
+        self.playDirection = 0
         self.playing = True
         self.discards = []
 
-    def canPlay(self, discartCard, playerHand):
+    def discard(self, card):
+        if isinstance(card, collections.Iterable):
+            self.discards.extend(card)
+        else:
+            self.discards.append(card)
+
+    def getDiscardCard(self):
+        return self.discards[-1]
+
+    def showDiscardCard(self):
+        print("")
+        print("--------Descarte--------")
+        self.getDiscardCard().showCard()
+        print("-------------------------")
+
+    def playTurn(self, player):
+        self.showDiscardCard()
+        print("-------------------------------------------------------")
+        print("--> Sua vez {}".format(player.getName()))
+        player.showHand()
+
+    def canPlay(self, playerHand):
         for card in playerHand:
-            if(discartCard.value == "Wild"):
+            if (card.getValue() == "Curinga" or card.getValue() == "+4"):
                 return True
-            elif discartCard.value == card.value or discartCard.color == card.color:
+            elif (self.getDiscardCard().getValue() == card.value or self.getDiscardCard().getColor() == card.color):
                 return True
         return False
 
-    def discard(self, card):
-        self.discards.append(card)
+    def chooseColor(self):
+        i = 1
+        print("-----Escolha uma cor-----")
+        for color in self.deck.getColors():
+            print("{}) Cor: {}".format(i, color))
+            i += 1
+        print("-------------------------")
+        colorChosen = int(input("Qual cor você quer? "))
+        self.getDiscardCard().color = self.deck.getColors()[colorChosen-1]
+        print("-------------------------")
 
-    def discardCard(self):
-        return self.discards[-1]
-
+    # verifica se a primeira carta virada é um curinga +4
     def firstDiscard(self):
-        firstDiscardCard = deck.unoDeck.pop()
-        while firstDiscardCard.value == "Wild" or firstDiscardCard.value == "+4"
+        card = self.deck.drawCards(1)[0]
+        while (card.getValue() == "+4"):
+            self.deck.insertCard(card)
+            card = self.deck.drawCards(1)[0]
+        self.discard(card)
+
+    def setPlayerTurn(self):
+        if (self.playerTurn == 0):
+            self.playerTurn = 1
+        else:
+            self.playerTurn = 0
 
     def start(self):
-        # tira a primeira carta do monte/deck
-        self.discards.append()
+        # primeira carta do jogo
+        self.firstDiscard()
 
-        # jogo em sí
-        while self.playing:
-            # mostra as cartas do jogador da vez.
-            self.players[self.playerTurn].showHand()
+        # jogo
+        while (self.playing == True):
+            # pega o obj do jogador da vez
+            player = self.players[self.playerTurn]
 
-            # mostra a carta descartada.
-            print("Topo da pilha de descartados: ")
-            self.discardCard().showCard()
-            print("---------------")
-
-            # verifica se o jogador da vez terá ou não de comprar uma carta
-            if(self.canPlay(self.discardCard(), self.players[self.playerTurn].cards)):
-                # pede para o jogador escolher uma carta
+            # exibe informações do jogador da vez
+            self.playTurn(player)
+            # verifica se o jogador da vez possui alguma carta que possa ser jogada
+            if(self.canPlay(player.getCards())):
                 cardChosen = int(input("Qual carta você quer jogar? "))
-                # verifica se a carta pode ser jogada seguindo as regras
-                while not self.canPlay(self.discardCard(), [self.players[self.playerTurn].cards[cardChosen-1]]):
-                    print("---------------")
+
+                # verifica se a carta escolhida pode ser jogada
+                while self.canPlay([player.getCards()[cardChosen-1]]) == False:
+                    # caso não, pede pro jogador da vez escolher outra carta
+                    print("-------------------------")
                     print("Que pena! Você não pode jogar essa.")
                     cardChosen = int(input("Qual carta você quer jogar? "))
-                    print("---------------")
+                    print("-------------------------")
 
-                # exibe a carta jogada
-                print("Você jogou: ")
-                self.players[self.playerTurn].cards[cardChosen-1].showCard()
-                print("---------------")
-                # põe a carta jogada no monte de discarte
-                self.discards.append(
-                    self.players[self.playerTurn].cards.pop(cardChosen-1))
-
+                # descarta a carta escolhida pelo jogador da vez
+                self.discard(player.discard(cardChosen))
+                if (self.getDiscardCard().getValue() == "Curinga"):
+                    self.chooseColor()
+                elif (self.getDiscardCard().getValue() == "+4"):
+                    self.setPlayerTurn()
+                    self.players[self.playerTurn].toFish(
+                        self.deck.drawCards(4))
+                    self.chooseColor()
+                elif (self.getDiscardCard().getValue() == "+2"):
+                    self.setPlayerTurn()
+                    self.players[self.playerTurn].toFish(
+                        self.deck.drawCards(2))
+                elif (self.getDiscardCard().getValue() == "Inverter"):
+                    self.players.reverse()
+                elif (self.getDiscardCard().getValue() == "Pular"):
+                    self.setPlayerTurn()
             else:
-                # compra uma carta pro jogador da vez
-                print("Você não pode jogar. Terá que comprar uma carta!")
-                self.players[self.playerTurn].cards.extend(deck.drawCards(1))
+                # compra uma carta e pula a vez
+                print("Você não pode jogar. Terá que comprar uma carta e passar a vez!")
+                player.toFish(self.deck.drawCards(1))
+                print("-------------------------------------------------------")
 
-            # verifica a direção do jogo e de quem é a vez
-            self.playerTurn += self.playDirection
-            if self.playerTurn == self.numPlayers:
-                self.playerTurn = 0
-            elif self.playerTurn < 0:
-                self.playerTurn = self.numPlayers-1
+            if(len(player.getCards()) == 0):
+                self.playing = False
+                print("-------------------------------------------------------")
+                print("Você ganhou!")
+                print(player.getName())
+                print("-------------------------------------------------------")
+
+            # define de quem é a vez
+            self.setPlayerTurn()

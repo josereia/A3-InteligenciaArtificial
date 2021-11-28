@@ -1,14 +1,32 @@
-import player
-import deck
-import game
+import os
+import platform
+from player import Player
+from deck import Deck
+from game import Game
 
-players = []
+"""
+Identifica o sistema operacional
+para dar o comando correto de 
+limpar o terminal.
+"""
+if (platform.system() == "Windows"):
+    os.system("cls")
+else:
+    os.system("clear")
 
-numPlayers = int(input("Quantos jogadores? "))
-print("----------------------------")
-for i in range(numPlayers):
-    playerName = str(input("Qual o nome do " + str(i+1) + "º jogador? "))
-    players.append(player.Player(playerName, deck.drawCards(7)))
 
-newGame = game.Game(players)
-newGame.start()
+"""
+Instancia a classe Deck.
+Define o nome do jogador e IA.
+Intancia a classe Game e inicia
+o jogo.
+"""
+deck = Deck()
+
+playerName = str(input("Insira seu nome: "))
+players = [
+    Player(playerName, deck.drawCards(7)),
+    Player("IA", deck.drawCards(7))
+]
+
+Game(deck, players).start()
