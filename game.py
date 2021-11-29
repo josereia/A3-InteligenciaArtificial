@@ -11,7 +11,7 @@ class Game:
         self.playDirection = 0
         self.playing = True
         self.discards = []
-
+    
     def discard(self, card):
         if isinstance(card, collections.Iterable):
             self.discards.extend(card)
@@ -91,6 +91,8 @@ class Game:
 
                 # descarta a carta escolhida pelo jogador da vez
                 self.discard(player.discard(cardChosen))
+
+                # Verifica as cartas especiais
                 if (self.getDiscardCard().getValue() == "Curinga"):
                     self.chooseColor()
                 elif (self.getDiscardCard().getValue() == "+4"):

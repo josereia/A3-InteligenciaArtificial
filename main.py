@@ -28,5 +28,5 @@ players = [
     Player(playerName, deck.drawCards(7)),
     Player("IA", deck.drawCards(7))
 ]
-
+# Começar o jogo
 Game(deck, players).start()
