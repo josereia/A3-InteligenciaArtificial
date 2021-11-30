@@ -1,8 +1,3 @@
-import collections
-
-from player import Player
-
-
 class Game:
     def __init__(self, deck, players):
         self.deck = deck
@@ -11,12 +6,9 @@ class Game:
         self.playDirection = 0
         self.playing = True
         self.discards = []
-    
+
     def discard(self, card):
-        if isinstance(card, collections.Iterable):
-            self.discards.extend(card)
-        else:
-            self.discards.append(card)
+        self.discards.append(card)
 
     def getDiscardCard(self):
         return self.discards[-1]
