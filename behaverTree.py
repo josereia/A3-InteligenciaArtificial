@@ -25,6 +25,7 @@ class BehaverTree:
             elif (self.getDiscardCard().getValue() == card.value or self.getDiscardCard().getColor() == card.color):
                 self.AddOptionList(card)
         
+        '''
         print("Possibilidades de cartas da IA jogar: " + str(len(self.optionList)))
         print("São elas: ")
         for card in self.optionList:
@@ -32,4 +33,5 @@ class BehaverTree:
 
         print("A carta escolhida será: ")
         self.optionList[0].showCard()
+        '''
         return self.getOptionList()[0]

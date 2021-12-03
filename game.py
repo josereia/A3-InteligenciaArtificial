@@ -131,17 +131,37 @@ class Game:
 
             # Se for a inteligencia artificial
             elif (self.playerTurn == 1):
-                print("Vez de " + str(player.name))
                 self.playTurn(player)
 
                 if(self.canPlay(player.getCards())):
-                    # Implementar a escolha de decisão com uma behaver tree
+                    '''
+                    Instancia a behaver tree
+                    cardChosen recebe a carta da IA
+                    indexOdCard recebe a posição desta carta para poder jogala
+                    '''
                     self.behaverTree = BehaverTree(player.getCards(), self.getDiscardCard())
                     cardChosen = self.behaverTree.decision()
-                    indexOfCard = player.getCards().index(cardChosen) + 1
+                    indexOfCard = player.getCards().index(cardChosen) + 1 # Encontra o index da carta que retorna da behaven tree
                     # descarta a carta escolhida pela behaven tree
                     self.discard(player.discard(indexOfCard))
-                    #print(str(indexOfCard))
+
+                    # Verifica as cartas especiais
+                    if (self.getDiscardCard().getValue() == "Curinga"):
+                        self.chooseColor()
+                    elif (self.getDiscardCard().getValue() == "+4"):
+                        self.setPlayerTurn()
+                        self.players[self.playerTurn].toFish(
+                            self.deck.drawCards(4))
+                        self.chooseColor()
+                    elif (self.getDiscardCard().getValue() == "+2"):
+                        self.setPlayerTurn()
+                        self.players[self.playerTurn].toFish(
+                            self.deck.drawCards(2))
+                    elif (self.getDiscardCard().getValue() == "Inverter"):
+                        self.players.reverse()
+                    elif (self.getDiscardCard().getValue() == "Pular"):
+                        self.setPlayerTurn()
+
                 else:
                     player.toFish(self.deck.drawCards(1))
                     print("A IA não tinha carta, teve que pescar.")
