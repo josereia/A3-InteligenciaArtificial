@@ -4,6 +4,14 @@ class Player:
         self.name = name
         self.cards = cards
 
+    #Ordena as cartas do jogador, de menor peso para maior peso
+    def sortCard(self):
+        # Retorna a chave para poder ordenar as cartas
+        def getKeyWeight(c):
+            return c.weight
+
+        return self.getCards().sort(key=getKeyWeight)
+
     def getName(self):
         return self.name
 

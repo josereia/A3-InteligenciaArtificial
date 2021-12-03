@@ -15,10 +15,11 @@ class Game:
 
     def showDiscardCard(self):
         print("")
-        print("--------Descarte--------")
+        print("------- Descarte -------")
         self.getDiscardCard().showCard()
         print("-------------------------")
 
+    # Método que imprime as cartas do jogador
     def playTurn(self, player):
         self.showDiscardCard()
         print("-------------------------------------------------------")
@@ -33,7 +34,8 @@ class Game:
                 return True
         return False
 
-    def chooseColor(self):
+    # Método que define a cor das cartas curingas
+    def chooseColor(self): 
         i = 1
         print("-----Escolha uma cor-----")
         for color in self.deck.getColors():
@@ -66,6 +68,8 @@ class Game:
         while (self.playing == True):
             # pega o obj do jogador da vez
             player = self.players[self.playerTurn]
+
+            player.sortCard()
 
             # exibe informações do jogador da vez
             self.playTurn(player)
