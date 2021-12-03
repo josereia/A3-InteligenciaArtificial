@@ -1,5 +1,4 @@
-```diff
-- # A3 UnoTurbo16Cilindros
+ # A3 UnoTurbo16Cilindros
 
 ## Humano X IA 
 
