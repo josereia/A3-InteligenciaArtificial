@@ -1,4 +1,4 @@
-from behaverTree import BehaverTree
+from ai import Ai
 
 class Game:
     def __init__(self, deck, players):
@@ -8,7 +8,7 @@ class Game:
         self.playDirection = 0
         self.playing = True
         self.discards = []
-        self.behaverTree = None
+        self.ai = None
 
     def discard(self, card):
         self.discards.append(card)
@@ -139,8 +139,8 @@ class Game:
                     cardChosen recebe a carta da IA
                     indexOdCard recebe a posição desta carta para poder jogala
                     '''
-                    self.behaverTree = BehaverTree(player.getCards(), self.getDiscardCard())
-                    cardChosen = self.behaverTree.decision()
+                    self.ai = Ai(player.getCards(), self.getDiscardCard())
+                    cardChosen = self.ai.decision()
                     indexOfCard = player.getCards().index(cardChosen) + 1 # Encontra o index da carta que retorna da behaven tree
                     # descarta a carta escolhida pela behaven tree
                     self.discard(player.discard(indexOfCard))
