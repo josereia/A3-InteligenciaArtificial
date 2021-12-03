@@ -1,6 +1,6 @@
  # A3 UnoTurbo16Cilindros
 
-## Humano X IA 
+Humano X IA 
 
 ## Requisitos para conseguir executar o jogo!
 
