@@ -26,7 +26,7 @@ deck = Deck()
 playerName = str(input("Insira seu nome: "))
 players = [
     Player(playerName, deck.drawCards(7)),
-    Player("IA", deck.drawCards(7))
+    Player("Bot", deck.drawCards(7))
 ]
 # Começar o jogo
 Game(deck, players).start()
