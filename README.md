@@ -21,10 +21,14 @@
 
 ## Conteúdo: 112 cartas de jogo, sendo: 
 
-► 19 Cartas Azuis - 0 a 9; 
-► 19 Cartas Verdes - 0 a 9; 
-► 19 Cartas Amarelas - 0 a 9; 
-► 19 Cartas Vermelhas - 0 a 9; 
+► 19 Cartas Azuis - 0 a 9;  
+
+► 19 Cartas Verdes - 0 a 9;  
+
+► 19 Cartas Amarelas - 0 a 9;  
+
+► 19 Cartas Vermelhas - 0 a 9;  
+
 ► 8 Cartas Comprar Duas Cartas - 2 de cada cor;
 ► 8 Cartas Inverter - 2 de cada cor; 
 ► 8 Cartas Pular - 2 de cada cor, 
