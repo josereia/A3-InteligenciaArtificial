@@ -9,9 +9,11 @@
 
 ## Tutorial para iniciar o jogo!
 
-###### Em ambiente Windows: Na pasta do jogo, execute no prompt de comando o seguinte comando:  "py main.py".
+###### Em ambiente Windows: Na pasta do jogo, execute no prompt de comando o seguinte comando:
 
-##### Em ambiente Linux: Na pasta do jogo, execute no terminal o comando: "python3 main.py".
+`py main.py`
+
+###### Em ambiente Linux: Na pasta do jogo, execute no terminal o comando: "python3 main.py".
 
 
 
