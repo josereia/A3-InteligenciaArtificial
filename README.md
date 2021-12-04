@@ -5,7 +5,7 @@
 
 ## Requisitos para conseguir executar o jogo!
 
-Ter o Phyton instalado na sua maquina (https://www.python.org/downloads/)
+###### Ter o Phyton instalado na sua maquina https://www.python.org/downloads/
 
 # Tutorial para iniciar o jogo!
 
