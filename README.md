@@ -13,7 +13,9 @@
 
 `py main.py`
 
-###### Em ambiente Linux: Na pasta do jogo, execute no terminal o comando: "python3 main.py".
+###### Em ambiente Linux: Na pasta do jogo, execute no terminal o comando:
+
+`python3 main.py`
 
 
 
