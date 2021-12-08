@@ -66,11 +66,28 @@ class Game:
             card = self.deck.drawCards(1)[0]
         self.discard(card)
 
+    def isSpetial(self):
+        if (self.getDiscardCard().getValue() == "Curinga"):
+            self.chooseColor()
+        elif (self.getDiscardCard().getValue() == "+4"):
+            self.setPlayerTurn()
+            self.players[self.playerTurn].toFish(
+            self.deck.drawCards(4))
+            self.chooseColor()
+        elif (self.getDiscardCard().getValue() == "+2"):
+            self.setPlayerTurn()
+            self.players[self.playerTurn].toFish(
+            self.deck.drawCards(2))
+        elif (self.getDiscardCard().getValue() == "Inverter"):
+            self.players.reverse()
+        elif (self.getDiscardCard().getValue() == "Pular"):
+            self.setPlayerTurn()
+
     # Aqui é onde estão as regras do jogo
     def start(self):
         # primeira carta do jogo
         self.firstDiscard()
-
+        
         # jogo
         while (self.playing == True):
             # pega o obj do jogador da vez
@@ -98,21 +115,7 @@ class Game:
                     self.discard(player.discard(cardChosen))
 
                     # Verifica as cartas especiais
-                    if (self.getDiscardCard().getValue() == "Curinga"):
-                        self.chooseColor()
-                    elif (self.getDiscardCard().getValue() == "+4"):
-                        self.setPlayerTurn()
-                        self.players[self.playerTurn].toFish(
-                            self.deck.drawCards(4))
-                        self.chooseColor()
-                    elif (self.getDiscardCard().getValue() == "+2"):
-                        self.setPlayerTurn()
-                        self.players[self.playerTurn].toFish(
-                            self.deck.drawCards(2))
-                    elif (self.getDiscardCard().getValue() == "Inverter"):
-                        self.players.reverse()
-                    elif (self.getDiscardCard().getValue() == "Pular"):
-                        self.setPlayerTurn()
+                    self.isSpetial()
                 else:
                     # compra uma carta e pula a vez
                     print("Você não pode jogar. Terá que comprar uma carta e passar a vez!")
@@ -146,21 +149,7 @@ class Game:
                     self.discard(player.discard(indexOfCard))
 
                     # Verifica as cartas especiais
-                    if (self.getDiscardCard().getValue() == "Curinga"):
-                        self.chooseColor()
-                    elif (self.getDiscardCard().getValue() == "+4"):
-                        self.setPlayerTurn()
-                        self.players[self.playerTurn].toFish(
-                            self.deck.drawCards(4))
-                        self.chooseColor()
-                    elif (self.getDiscardCard().getValue() == "+2"):
-                        self.setPlayerTurn()
-                        self.players[self.playerTurn].toFish(
-                            self.deck.drawCards(2))
-                    elif (self.getDiscardCard().getValue() == "Inverter"):
-                        self.players.reverse()
-                    elif (self.getDiscardCard().getValue() == "Pular"):
-                        self.setPlayerTurn()
+                    self.isSpetial()
 
                 else:
                     player.toFish(self.deck.drawCards(1))
