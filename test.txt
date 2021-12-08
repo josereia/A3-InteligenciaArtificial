@@ -1,6 +1,0 @@
-import collections
-
-
-if isinstance(card, collections.Iterable):
-            self.discards.extend(card)
-        else:
