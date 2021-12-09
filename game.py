@@ -1,5 +1,6 @@
 from ai import Ai
 
+
 class Game:
     def __init__(self, deck, players):
         self.deck = deck
@@ -15,7 +16,7 @@ class Game:
 
     def getDiscardCard(self):
         return self.discards[-1]
-    
+
     def showDiscardCard(self):
         print("")
         print("------- Descarte -------")
@@ -47,7 +48,7 @@ class Game:
         return False
 
     # Método que define a cor das cartas curingas
-    def chooseColor(self): 
+    def chooseColor(self):
         i = 1
         print("-----Escolha uma cor-----")
         for color in self.deck.getColors():
@@ -65,6 +66,7 @@ class Game:
             self.deck.insertCard(card)
             card = self.deck.drawCards(1)[0]
         self.discard(card)
+        self.isSpetial()
 
     def isSpetial(self):
         if (self.getDiscardCard().getValue() == "Curinga"):
@@ -72,12 +74,12 @@ class Game:
         elif (self.getDiscardCard().getValue() == "+4"):
             self.setPlayerTurn()
             self.players[self.playerTurn].toFish(
-            self.deck.drawCards(4))
+                self.deck.drawCards(4))
             self.chooseColor()
         elif (self.getDiscardCard().getValue() == "+2"):
             self.setPlayerTurn()
             self.players[self.playerTurn].toFish(
-            self.deck.drawCards(2))
+                self.deck.drawCards(2))
         elif (self.getDiscardCard().getValue() == "Inverter"):
             self.players.reverse()
         elif (self.getDiscardCard().getValue() == "Pular"):
@@ -87,16 +89,16 @@ class Game:
     def start(self):
         # primeira carta do jogo
         self.firstDiscard()
-        
+
         # jogo
         while (self.playing == True):
             # pega o obj do jogador da vez
             player = self.players[self.playerTurn]
-            player.sortCard() # Ordena as cartas do jogador
+            player.sortCard()  # Ordena as cartas do jogador
 
             # Se for o Jogador humano.
             if (self.getPlayerTurn() == 0):
-                
+
                 # exibe informações do jogador da vez
                 self.playTurn(player)
                 # verifica se o jogador da vez possui alguma carta que possa ser jogada
@@ -118,7 +120,8 @@ class Game:
                     self.isSpetial()
                 else:
                     # compra uma carta e pula a vez
-                    print("Você não pode jogar. Terá que comprar uma carta e passar a vez!")
+                    print(
+                        "Você não pode jogar. Terá que comprar uma carta e passar a vez!")
                     player.toFish(self.deck.drawCards(1))
                     print("-------------------------------------------------------")
 
@@ -144,7 +147,8 @@ class Game:
                     '''
                     self.ai = Ai(player.getCards(), self.getDiscardCard())
                     cardChosen = self.ai.decision()
-                    indexOfCard = player.getCards().index(cardChosen) + 1 # Encontra o index da carta que retorna da behaven tree
+                    # Encontra o index da carta que retorna da behaven tree
+                    indexOfCard = player.getCards().index(cardChosen) + 1
                     # descarta a carta escolhida pela behaven tree
                     self.discard(player.discard(indexOfCard))
 
@@ -156,10 +160,10 @@ class Game:
                     print("A IA não tinha carta, teve que pescar.")
                     print("-------------------------------------------------------")
 
-                if ( len(player.getCards()) == 0):
+                if (len(player.getCards()) == 0):
                     self.playing = False
                     print("-------------------------------------------------------")
                     print("Você perdeu!")
                     print("-------------------------------------------------------")
-                
+
                 self.setPlayerTurn()
