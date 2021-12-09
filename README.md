@@ -1,4 +1,4 @@
- # A3 UnoTurbo16Cilindros
+ # A3 UnoTurbo V8
 
  ### Humano X IA
 ###### Este projeto tem como objetivo uma partida de jogo de cartas Uno, entre um humano e uma Inteligência Artificial
