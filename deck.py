@@ -30,5 +30,5 @@ class Deck:
     def drawCards(self, numCards):
         cardsDrawn = []  # Armazena as cartas distribuidas
         for i in range(numCards):
-            cardsDrawn.append(self.unoDeck.pop())
+            cardsDrawn.append(self.unoDeck.pop()) # Adiciona carta no cardDraw
         return cardsDrawn

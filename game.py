@@ -105,6 +105,11 @@ class Game:
                 if(self.canPlay(player.getCards())):
                     cardChosen = int(input("Qual carta você quer jogar? "))
 
+                    # Verifica se a carta inserida é maior que qauntidade de cartas que o jogador tem em mãos
+                    while  cardChosen > len(player.getCards()):
+                        print("Opção invalida")
+                        cardChosen = int(input("Qual carta você quer jogar? "))
+
                     # verifica se a carta escolhida pode ser jogada
                     while self.canPlay([player.getCards()[cardChosen-1]]) == False:
                         # caso não, pede pro jogador da vez escolher outra carta
